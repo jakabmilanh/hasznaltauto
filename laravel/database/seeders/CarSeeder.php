@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Car;
 
-class CarsTableSeeder extends Seeder
+class CarSeeder extends Seeder
 {
     /**
      * Run the database seeds.

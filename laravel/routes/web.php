@@ -8,7 +8,10 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/new-car', [CarController::class, 'create'])->name('cars.create');
+    Route::post('/cars', [CarController::class, 'store'])->name('cars.store');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -16,9 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/dashboard', [CarController::class, 'index'])->name('cars.index');
-    
-    Route::get('/new-car', [CarController::class, 'create'])->name('cars.create');
-    Route::post('/cars', [CarController::class, 'store'])->name('cars.store');
+
 
 
 });

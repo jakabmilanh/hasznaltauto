@@ -20,15 +20,14 @@ class CarController extends Controller
     }
     public function create()
     {
-        // Fetch car types for the dropdown
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
         $carTypes = CarType::all();
         return view('pages.new', compact('carTypes'));
     }
     public function store(Request $request)
     {
-        if (Auth::user()->role !== 'admin') {
-            abort(403, 'Unauthorized action.');
-        }
         
         $validated = $request->validate([
             'car_type_id' => 'required|exists:car_types,id',
